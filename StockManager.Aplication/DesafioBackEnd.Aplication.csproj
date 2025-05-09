@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>StockManager.Aplication</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Remove="UseCases\UserPermissions\**" />
+      <EmbeddedResource Remove="UseCases\UserPermissions\**" />
+      <None Remove="UseCases\UserPermissions\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="14.0.0" />
+      <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+      <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+      <PackageReference Include="MediatR.Extensions.Autofac.DependencyInjection" Version="12.2.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.1" />
+      <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.1" />
+      <PackageReference Include="System.Linq.Dynamic.Core" Version="1.6.0.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\StockManager.Domain\DesafioBackEnd.Domain.csproj" />
+      <ProjectReference Include="..\StockManager.Repositories\DesafioBackEnd.Repositories.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="UseCases\PermissionGroups\Queries\" />
+    </ItemGroup>
+    
+
+</Project>
