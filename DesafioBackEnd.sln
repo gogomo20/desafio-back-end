@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesafioBackEnd.API", "StockManager.API\DesafioBackEnd.API.csproj", "{BD230A0B-1802-4DE0-947A-D7B2172F3E5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesafioBackEnd.API", "DesafioBackEnd.API\DesafioBackEnd.API.csproj", "{BD230A0B-1802-4DE0-947A-D7B2172F3E5B}"
 	ProjectSection(ProjectDependencies) = postProject
 		{BB9BACAD-30C5-4F25-B6B0-656D67460118} = {BB9BACAD-30C5-4F25-B6B0-656D67460118}
 		{7D9E73C9-78AD-4CF7-AA7F-1EB7120C7688} = {7D9E73C9-78AD-4CF7-AA7F-1EB7120C7688}
@@ -13,21 +13,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2CFBE577-9C9E-44C5-895D-609525D4506D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesafioBackEnd.Test", "StockManager.Test\DesafioBackEnd.Test.csproj", "{2F3CB373-90B4-4F66-BCDD-9A9C42B254AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesafioBackEnd.Test", "DesafioBackEnd.Test\DesafioBackEnd.Test.csproj", "{2F3CB373-90B4-4F66-BCDD-9A9C42B254AD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{9BD96C9A-B8D7-4B91-9151-7BEDCFB5A0AE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Provider", "Provider", "{20453645-6870-4AFA-89E5-5C915919E999}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesafioBackEnd.Persistense", "StockManager.Persistense\DesafioBackEnd.Persistense.csproj", "{9F930503-54BE-40F6-B958-B429E309ACE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesafioBackEnd.Persistense", "DesafioBackEnd.Persistense\DesafioBackEnd.Persistense.csproj", "{9F930503-54BE-40F6-B958-B429E309ACE9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesafioBackEnd.Domain", "StockManager.Domain\DesafioBackEnd.Domain.csproj", "{ADBA4264-6A5F-4702-A957-973BA57F0C40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesafioBackEnd.Domain", "DesafioBackEnd.Domain\DesafioBackEnd.Domain.csproj", "{ADBA4264-6A5F-4702-A957-973BA57F0C40}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesafioBackEnd.Aplication", "StockManager.Aplication\DesafioBackEnd.Aplication.csproj", "{BB9BACAD-30C5-4F25-B6B0-656D67460118}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesafioBackEnd.Aplication", "DesafioBackEnd.Aplication\DesafioBackEnd.Aplication.csproj", "{BB9BACAD-30C5-4F25-B6B0-656D67460118}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{584989CC-C377-4D12-9BD0-E417115C675B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesafioBackEnd.Repositories", "StockManager.Repositories\DesafioBackEnd.Repositories.csproj", "{7D9E73C9-78AD-4CF7-AA7F-1EB7120C7688}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesafioBackEnd.Repositories", "DesafioBackEnd.Repositories\DesafioBackEnd.Repositories.csproj", "{7D9E73C9-78AD-4CF7-AA7F-1EB7120C7688}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
