@@ -24,8 +24,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\StockManager.Domain\DesafioBackEnd.Domain.csproj" />
-      <ProjectReference Include="..\StockManager.Repositories\DesafioBackEnd.Repositories.csproj" />
+      <ProjectReference Include="..\DesafioBackEnd.Domain\DesafioBackEnd.Domain.csproj" />
+      <ProjectReference Include="..\DesafioBackEnd.Repositories\DesafioBackEnd.Repositories.csproj" />
     </ItemGroup>
 
     <ItemGroup>

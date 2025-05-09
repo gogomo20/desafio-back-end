@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using StockManager.Domain.Basis;
@@ -26,6 +27,21 @@ public class ConnectionContext : DbContext
         modelBuilder.ApplyConfiguration(new UserConfiguration());
         modelBuilder.ApplyConfiguration(new PermissionConfiguration());
         modelBuilder.ApplyConfiguration(new PermissionGroupConfiguration());
+
+        #region DefaultFilterDeleted
+        foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+        {
+            if(typeof(BaseTable).IsAssignableFrom(entityType.ClrType)){
+                var parameter = Expression.Parameter(entityType.ClrType, "e");
+                var property = Expression.Property(parameter, nameof(BaseTable.Status));
+                var constant = Expression.Constant("A");
+                var equal = Expression.Equal(property, constant);
+                var lambda = Expression.Lambda(equal, parameter);
+
+                modelBuilder.Entity(entityType.ClrType).HasQueryFilter(lambda);
+            }
+        }
+        #endregion
     }
     #region AuditChanges
     public override int SaveChanges()
@@ -54,6 +70,12 @@ public class ConnectionContext : DbContext
                 case EntityState.Modified:
                     entry.Entity.UpdatedBy = userId;
                     entry.Entity.UpdatedAt = DateTime.UtcNow;
+                    break;
+                case EntityState.Deleted:
+                    entry.State = EntityState.Modified;
+                    entry.Entity.UpdatedBy = userId;
+                    entry.Entity.UpdatedAt = DateTime.UtcNow;
+                    entry.Entity.Status = "I";
                     break;
             }
         }

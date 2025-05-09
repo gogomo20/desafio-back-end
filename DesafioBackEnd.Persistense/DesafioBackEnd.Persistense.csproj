@@ -21,7 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\StockManager.Aplication\DesafioBackEnd.Aplication.csproj" />
+      <ProjectReference Include="..\DesafioBackEnd.Aplication\DesafioBackEnd.Aplication.csproj" />
     </ItemGroup>
 
     <ItemGroup>

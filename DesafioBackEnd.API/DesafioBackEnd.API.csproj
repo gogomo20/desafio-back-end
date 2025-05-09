@@ -19,6 +19,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\StockManager.Persistense\DesafioBackEnd.Persistense.csproj" />
+      <ProjectReference Include="..\DesafioBackEnd.Persistense\DesafioBackEnd.Persistense.csproj" />
     </ItemGroup>
 </Project>
