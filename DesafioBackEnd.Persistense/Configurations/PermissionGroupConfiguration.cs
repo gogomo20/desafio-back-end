@@ -10,7 +10,8 @@ namespace StockManager.Persistense.Configurations
             builder.Property(x => x.Name).IsRequired().HasMaxLength(255);
             builder.Property(x => x.Status).IsRequired().HasMaxLength(1).HasComment("A - Active, I - Inactive").HasDefaultValue("A");
             builder.HasData(
-                new PermissionGroup { Name = "User", Id = 1, Status = "A" }
+                new PermissionGroup { Name = "User", Id = 1, Status = "A" },
+                new PermissionGroup { Name = "Wallet", Id = 2, Status = "A" }
             );
         }
     }

@@ -18,7 +18,7 @@ namespace StockManager.Aplication.UseCases.Users.Commands.Create;
 public class CreateUserCommand : UserCommandBase
 {   
     public string? Password { get; set; }
-    public ICollection<string> Permissions { get; set; } = [];
+    public long? ProfileId { get; set; }
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, GenericResponse<long>>
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -38,6 +38,12 @@ public class CreateUserCommand : UserCommandBase
                 var user = _mapper.Map<User>(request);
                 user.Password = StringUtils.GetBcryptHash(request.Password);
                 await _unitOfWork.GetRepositoryAsync<User>().InsertAsync(user);
+                await _unitOfWork.CommitAsync();
+                var wallet = new Wallet
+                {
+                    UserId = user.Id
+                };
+                await _unitOfWork.GetRepositoryAsync<Wallet>().InsertAsync(wallet);
                 await _unitOfWork.CommitAsync();
                 response.Data = user.Id;
                 response.Message = "User created successfully";

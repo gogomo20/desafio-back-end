@@ -20,7 +20,13 @@ public class PermissionConfiguration : IEntityTypeConfiguration<Permission>
             new Permission { Id = 2, Name = "UPDATE_USER", Description = "Update user", PermissionGroupId = 1 },
             new Permission { Id = 3, Name = "GET_USER", Description = "View user", PermissionGroupId = 1 },
             new Permission { Id = 4, Name = "LIST_USER", Description = "List user", PermissionGroupId = 1 },
-            new Permission { Id = 5, Name = "DELETE_USER", Description = "Delete user", PermissionGroupId = 1 }
+            new Permission { Id = 5, Name = "DELETE_USER", Description = "Delete user", PermissionGroupId = 1 },
+            new Permission { Id = 6, Name = "ADD_BALANCE", Description = "Add balance", PermissionGroupId = 2 },
+            new Permission { Id = 7, Name = "REMOVE_BALANCE", Description = "Remove balance", PermissionGroupId = 2 },
+            new Permission { Id = 8, Name = "GET_BALANCE", Description = "Get balance", PermissionGroupId = 2 },
+            new Permission { Id = 9, Name = "CREATE_TRANSFERENCE", Description = "Create transference", PermissionGroupId = 2 },
+            new Permission { Id = 10, Name = "GET_TRANSFERENCE", Description = "Get transference", PermissionGroupId = 2 },
+            new Permission { Id = 11, Name = "LIST_TRANSFERENCE", Description = "List transference", PermissionGroupId = 2 }
         );
     }
 }

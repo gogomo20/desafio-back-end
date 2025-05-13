@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using StockManager.Persistense.Context;
@@ -11,9 +12,11 @@ using StockManager.Persistense.Context;
 namespace StockManager.Persistense.Migrations
 {
     [DbContext(typeof(ConnectionContext))]
-    partial class ConnectionContextModelSnapshot : ModelSnapshot
+    [Migration("20250513041530_WalletPermissions")]
+    partial class WalletPermissions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,7 +34,7 @@ namespace StockManager.Persistense.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<long?>("CreatedBy")
                         .HasColumnType("bigint");
@@ -53,7 +56,7 @@ namespace StockManager.Persistense.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<long?>("UpdatedBy")
                         .HasColumnType("bigint");
@@ -169,7 +172,7 @@ namespace StockManager.Persistense.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<long?>("CreatedBy")
                         .HasColumnType("bigint");
@@ -188,7 +191,7 @@ namespace StockManager.Persistense.Migrations
                         .HasComment("A - Active, I - Inactive");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<long?>("UpdatedBy")
                         .HasColumnType("bigint");
@@ -221,7 +224,7 @@ namespace StockManager.Persistense.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<long?>("CreatedBy")
                         .HasColumnType("bigint");
@@ -240,7 +243,7 @@ namespace StockManager.Persistense.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<long?>("UpdatedBy")
                         .HasColumnType("bigint");
@@ -268,7 +271,7 @@ namespace StockManager.Persistense.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<long?>("CreatedBy")
                         .HasColumnType("bigint");
@@ -284,7 +287,7 @@ namespace StockManager.Persistense.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<long?>("UpdatedBy")
                         .HasColumnType("bigint");
@@ -377,48 +380,6 @@ namespace StockManager.Persistense.Migrations
                         });
                 });
 
-            modelBuilder.Entity("StockManager.Domain.Entities.Transference", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<long?>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("ReceiverId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("SenderId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<decimal>("Value")
-                        .HasColumnType("numeric");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ReceiverId");
-
-                    b.HasIndex("SenderId");
-
-                    b.ToTable("Transference");
-                });
-
             modelBuilder.Entity("StockManager.Domain.Entities.User", b =>
                 {
                     b.Property<long>("Id")
@@ -428,7 +389,7 @@ namespace StockManager.Persistense.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<long?>("CreatedBy")
                         .HasColumnType("bigint");
@@ -455,7 +416,7 @@ namespace StockManager.Persistense.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<long?>("UpdatedBy")
                         .HasColumnType("bigint");
@@ -483,7 +444,7 @@ namespace StockManager.Persistense.Migrations
                             Id = 1L,
                             Email = "admin@admin",
                             Name = "admin",
-                            Password = "$2a$10$S5IOR6Ip9spG1Lx6ikdCXe3AxgbhLPLJeAhR2gWM4jgPcbnqBInvi",
+                            Password = "$2a$10$irYAuE5BMszN43ux4uQ7I.chHkg6zTV4mpiGEVRINf6SiP7e/0pbG",
                             ProfileId = 1L,
                             Status = "A",
                             UserName = "admin"
@@ -502,7 +463,7 @@ namespace StockManager.Persistense.Migrations
                         .HasColumnType("numeric");
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<long?>("CreatedBy")
                         .HasColumnType("bigint");
@@ -512,7 +473,7 @@ namespace StockManager.Persistense.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<long?>("UpdatedBy")
                         .HasColumnType("bigint");
@@ -560,25 +521,6 @@ namespace StockManager.Persistense.Migrations
                         .HasForeignKey("ProfileEntityId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("StockManager.Domain.Entities.Transference", b =>
-                {
-                    b.HasOne("StockManager.Domain.Entities.User", "Reciever")
-                        .WithMany()
-                        .HasForeignKey("ReceiverId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("StockManager.Domain.Entities.User", "Sender")
-                        .WithMany()
-                        .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Reciever");
-
-                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("StockManager.Domain.Entities.User", b =>

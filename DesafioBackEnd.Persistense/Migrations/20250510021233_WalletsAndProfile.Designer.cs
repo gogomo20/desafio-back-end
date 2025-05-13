@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using StockManager.Persistense.Context;
@@ -11,9 +12,11 @@ using StockManager.Persistense.Context;
 namespace StockManager.Persistense.Migrations
 {
     [DbContext(typeof(ConnectionContext))]
-    partial class ConnectionContextModelSnapshot : ModelSnapshot
+    [Migration("20250510021233_WalletsAndProfile")]
+    partial class WalletsAndProfile
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,7 +34,7 @@ namespace StockManager.Persistense.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<long?>("CreatedBy")
                         .HasColumnType("bigint");
@@ -53,7 +56,7 @@ namespace StockManager.Persistense.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<long?>("UpdatedBy")
                         .HasColumnType("bigint");
@@ -109,54 +112,6 @@ namespace StockManager.Persistense.Migrations
                             Name = "DELETE_USER",
                             PermissionGroupId = 1L,
                             Status = "A"
-                        },
-                        new
-                        {
-                            Id = 6L,
-                            Description = "Add balance",
-                            Name = "ADD_BALANCE",
-                            PermissionGroupId = 2L,
-                            Status = "A"
-                        },
-                        new
-                        {
-                            Id = 7L,
-                            Description = "Remove balance",
-                            Name = "REMOVE_BALANCE",
-                            PermissionGroupId = 2L,
-                            Status = "A"
-                        },
-                        new
-                        {
-                            Id = 8L,
-                            Description = "Get balance",
-                            Name = "GET_BALANCE",
-                            PermissionGroupId = 2L,
-                            Status = "A"
-                        },
-                        new
-                        {
-                            Id = 9L,
-                            Description = "Create transference",
-                            Name = "CREATE_TRANSFERENCE",
-                            PermissionGroupId = 2L,
-                            Status = "A"
-                        },
-                        new
-                        {
-                            Id = 10L,
-                            Description = "Get transference",
-                            Name = "GET_TRANSFERENCE",
-                            PermissionGroupId = 2L,
-                            Status = "A"
-                        },
-                        new
-                        {
-                            Id = 11L,
-                            Description = "List transference",
-                            Name = "LIST_TRANSFERENCE",
-                            PermissionGroupId = 2L,
-                            Status = "A"
                         });
                 });
 
@@ -169,7 +124,7 @@ namespace StockManager.Persistense.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<long?>("CreatedBy")
                         .HasColumnType("bigint");
@@ -188,7 +143,7 @@ namespace StockManager.Persistense.Migrations
                         .HasComment("A - Active, I - Inactive");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<long?>("UpdatedBy")
                         .HasColumnType("bigint");
@@ -203,12 +158,6 @@ namespace StockManager.Persistense.Migrations
                             Id = 1L,
                             Name = "User",
                             Status = "A"
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            Name = "Wallet",
-                            Status = "A"
                         });
                 });
 
@@ -221,7 +170,7 @@ namespace StockManager.Persistense.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<long?>("CreatedBy")
                         .HasColumnType("bigint");
@@ -240,7 +189,7 @@ namespace StockManager.Persistense.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<long?>("UpdatedBy")
                         .HasColumnType("bigint");
@@ -268,7 +217,7 @@ namespace StockManager.Persistense.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<long?>("CreatedBy")
                         .HasColumnType("bigint");
@@ -284,7 +233,7 @@ namespace StockManager.Persistense.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<long?>("UpdatedBy")
                         .HasColumnType("bigint");
@@ -332,91 +281,7 @@ namespace StockManager.Persistense.Migrations
                             PermissionId = 5L,
                             ProfileEntityId = 1L,
                             Status = "A"
-                        },
-                        new
-                        {
-                            Id = 6L,
-                            PermissionId = 6L,
-                            ProfileEntityId = 1L,
-                            Status = "A"
-                        },
-                        new
-                        {
-                            Id = 7L,
-                            PermissionId = 7L,
-                            ProfileEntityId = 1L,
-                            Status = "A"
-                        },
-                        new
-                        {
-                            Id = 8L,
-                            PermissionId = 8L,
-                            ProfileEntityId = 1L,
-                            Status = "A"
-                        },
-                        new
-                        {
-                            Id = 9L,
-                            PermissionId = 9L,
-                            ProfileEntityId = 1L,
-                            Status = "A"
-                        },
-                        new
-                        {
-                            Id = 10L,
-                            PermissionId = 10L,
-                            ProfileEntityId = 1L,
-                            Status = "A"
-                        },
-                        new
-                        {
-                            Id = 11L,
-                            PermissionId = 11L,
-                            ProfileEntityId = 1L,
-                            Status = "A"
                         });
-                });
-
-            modelBuilder.Entity("StockManager.Domain.Entities.Transference", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<long?>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("ReceiverId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("SenderId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<decimal>("Value")
-                        .HasColumnType("numeric");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ReceiverId");
-
-                    b.HasIndex("SenderId");
-
-                    b.ToTable("Transference");
                 });
 
             modelBuilder.Entity("StockManager.Domain.Entities.User", b =>
@@ -428,7 +293,7 @@ namespace StockManager.Persistense.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<long?>("CreatedBy")
                         .HasColumnType("bigint");
@@ -447,15 +312,12 @@ namespace StockManager.Persistense.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<long?>("ProfileId")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<long?>("UpdatedBy")
                         .HasColumnType("bigint");
@@ -470,8 +332,6 @@ namespace StockManager.Persistense.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.HasIndex("ProfileId");
-
                     b.HasIndex("UserName")
                         .IsUnique();
 
@@ -483,8 +343,7 @@ namespace StockManager.Persistense.Migrations
                             Id = 1L,
                             Email = "admin@admin",
                             Name = "admin",
-                            Password = "$2a$10$S5IOR6Ip9spG1Lx6ikdCXe3AxgbhLPLJeAhR2gWM4jgPcbnqBInvi",
-                            ProfileId = 1L,
+                            Password = "$2a$10$jzvzHyTPOi7yiPlXGAFnaedyHXqecPfii/tBqLPJIv1/l506IBBvS",
                             Status = "A",
                             UserName = "admin"
                         });
@@ -502,7 +361,7 @@ namespace StockManager.Persistense.Migrations
                         .HasColumnType("numeric");
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<long?>("CreatedBy")
                         .HasColumnType("bigint");
@@ -512,7 +371,7 @@ namespace StockManager.Persistense.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<long?>("UpdatedBy")
                         .HasColumnType("bigint");
@@ -560,35 +419,6 @@ namespace StockManager.Persistense.Migrations
                         .HasForeignKey("ProfileEntityId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("StockManager.Domain.Entities.Transference", b =>
-                {
-                    b.HasOne("StockManager.Domain.Entities.User", "Reciever")
-                        .WithMany()
-                        .HasForeignKey("ReceiverId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("StockManager.Domain.Entities.User", "Sender")
-                        .WithMany()
-                        .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Reciever");
-
-                    b.Navigation("Sender");
-                });
-
-            modelBuilder.Entity("StockManager.Domain.Entities.User", b =>
-                {
-                    b.HasOne("StockManager.Domain.Entities.ProfileEntity", "Profile")
-                        .WithMany()
-                        .HasForeignKey("ProfileId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("StockManager.Domain.Entities.Wallet", b =>

@@ -12,8 +12,8 @@ using StockManager.Persistense.Context;
 namespace StockManager.Persistense.Migrations
 {
     [DbContext(typeof(ConnectionContext))]
-    [Migration("20250509214945_AddSoftDelete")]
-    partial class AddSoftDelete
+    [Migration("20250512231132_AddProfileToUser")]
+    partial class AddProfileToUser
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -161,6 +161,129 @@ namespace StockManager.Persistense.Migrations
                         });
                 });
 
+            modelBuilder.Entity("StockManager.Domain.Entities.ProfileEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("CreatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("profile");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            Description = "Admin profile",
+                            Name = "Admin",
+                            Status = "A"
+                        });
+                });
+
+            modelBuilder.Entity("StockManager.Domain.Entities.ProfilePermissions", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("CreatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("PermissionId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("ProfileEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PermissionId");
+
+                    b.HasIndex("ProfileEntityId");
+
+                    b.ToTable("ProfilePermissions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            PermissionId = 1L,
+                            ProfileEntityId = 1L,
+                            Status = "A"
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            PermissionId = 2L,
+                            ProfileEntityId = 1L,
+                            Status = "A"
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            PermissionId = 3L,
+                            ProfileEntityId = 1L,
+                            Status = "A"
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            PermissionId = 4L,
+                            ProfileEntityId = 1L,
+                            Status = "A"
+                        },
+                        new
+                        {
+                            Id = 5L,
+                            PermissionId = 5L,
+                            ProfileEntityId = 1L,
+                            Status = "A"
+                        });
+                });
+
             modelBuilder.Entity("StockManager.Domain.Entities.User", b =>
                 {
                     b.Property<long>("Id")
@@ -189,6 +312,9 @@ namespace StockManager.Persistense.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<long?>("ProfileId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("text");
@@ -209,6 +335,8 @@ namespace StockManager.Persistense.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
+                    b.HasIndex("ProfileId");
+
                     b.HasIndex("UserName")
                         .IsUnique();
 
@@ -220,9 +348,57 @@ namespace StockManager.Persistense.Migrations
                             Id = 1L,
                             Email = "admin@admin",
                             Name = "admin",
-                            Password = "$2a$10$HOWzjKO1dXsEgTGfw7e0j.4w9prEYjJkK6nz7MQJO.VpHrSf.YlxK",
+                            Password = "$2a$10$BxAGNBEuWmZS4NHWmHICmuGlPwSJZRwIkNYL24qFRJgXN.VQE44DG",
+                            ProfileId = 1L,
                             Status = "A",
                             UserName = "admin"
+                        });
+                });
+
+            modelBuilder.Entity("StockManager.Domain.Entities.Wallet", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<decimal>("Balance")
+                        .HasColumnType("numeric");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("CreatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Wallet");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            Balance = 0m,
+                            Status = "A",
+                            UserId = 1L
                         });
                 });
 
@@ -234,6 +410,42 @@ namespace StockManager.Persistense.Migrations
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("PermissionGroup");
+                });
+
+            modelBuilder.Entity("StockManager.Domain.Entities.ProfilePermissions", b =>
+                {
+                    b.HasOne("StockManager.Domain.Entities.Permission", null)
+                        .WithMany()
+                        .HasForeignKey("PermissionId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("StockManager.Domain.Entities.ProfileEntity", null)
+                        .WithMany()
+                        .HasForeignKey("ProfileEntityId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("StockManager.Domain.Entities.User", b =>
+                {
+                    b.HasOne("StockManager.Domain.Entities.ProfileEntity", "Profile")
+                        .WithMany()
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Profile");
+                });
+
+            modelBuilder.Entity("StockManager.Domain.Entities.Wallet", b =>
+                {
+                    b.HasOne("StockManager.Domain.Entities.User", "User")
+                        .WithOne()
+                        .HasForeignKey("StockManager.Domain.Entities.Wallet", "UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

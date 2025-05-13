@@ -29,7 +29,9 @@ public class GetUserById : IRequest<GenericResponse<UserResponse>>
             try
             {
                 var user = await _unitOfWork.GetRepositoryAsync<User>()
-                    .SingleOrDefaultAsync(x => x.Id == request.Id);
+                    .SingleOrDefaultAsync(x => x.Id == request.Id
+                                            ,includes: x => x.Include(_ => _.Profile)
+                                                                            .ThenInclude(_=> _.Permissions));
                 if (user == null)
                 {
                     throw new KeyNotFoundException($"User with id {request.Id} not found");
@@ -37,9 +39,16 @@ public class GetUserById : IRequest<GenericResponse<UserResponse>>
                 response.Data = _mapper.Map<UserResponse>(user);
                 response.Message = "User found successfully";
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                response.Errors = ["An error occurred while getting the user"];
+                switch (ex)
+                {
+                    case KeyNotFoundException:
+                        throw;
+                    default:
+                        response.Errors = ["An error occurred while getting the user"];
+                        break;
+                }
             }
             return response;
         }

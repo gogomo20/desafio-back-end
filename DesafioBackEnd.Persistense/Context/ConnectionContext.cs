@@ -16,6 +16,7 @@ public class ConnectionContext : DbContext
         : base(options)
     {
         _httpContextAccessor = httpContextAccessor;
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
     }
     public DbSet<User> Users { get; set; }
     public DbSet<Permission> Permissions { get; set; }
@@ -27,6 +28,9 @@ public class ConnectionContext : DbContext
         modelBuilder.ApplyConfiguration(new UserConfiguration());
         modelBuilder.ApplyConfiguration(new PermissionConfiguration());
         modelBuilder.ApplyConfiguration(new PermissionGroupConfiguration());
+        modelBuilder.ApplyConfiguration(new ProfileConfiguration());
+        modelBuilder.ApplyConfiguration(new WalletConfiguration());
+        modelBuilder.ApplyConfiguration(new TransferenceConfiguration());
 
         #region DefaultFilterDeleted
         foreach (var entityType in modelBuilder.Model.GetEntityTypes())

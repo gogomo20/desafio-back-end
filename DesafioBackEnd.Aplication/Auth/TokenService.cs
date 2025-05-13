@@ -17,7 +17,12 @@ public class TokenService
             new Claim("name", user.Name),
             new Claim("username", user.UserName),
             new Claim("email", user.Email),
+            
         };
+        if (user.Profile != null)
+        {
+            claims.Add(new Claim("permissions", string.Join(",", user.Profile.Permissions.Select(x => x.Name))));
+        }
         var key = Encoding.ASCII.GetBytes(secret ?? "SECRET");
         // var tokenConfig = new SecurityTokenDescriptor
         // {

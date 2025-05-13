@@ -7,6 +7,6 @@ public class DefaultApiResponse<T>
     public int Pages { get; set; }
     public int Totals { get; set; }
     public int CurrentPage { get; set; }
-    public int NextPage { get; set; }
-    public int PreviousPage { get; set; }
+    public int? NextPage { get; set; }
+    public int? PreviousPage { get; set; }
 }

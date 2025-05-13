@@ -34,6 +34,8 @@ public class LoginCommand : IRequest<GenericResponse<LoginResponse>>
             {
                 var user = await _unitOfWork.GetRepositoryAsync<User>().SingleOrDefaultAsync(
                                                                     x => x.UserName == request.UserName,
+                                                                    includes: x => x.Include(_ => _.Profile)
+                                                                        .ThenInclude(_ => _.Permissions),
                                                                     cancellationToken: cancellationToken);
                 if (user == null)
                 {
@@ -54,6 +56,10 @@ public class LoginCommand : IRequest<GenericResponse<LoginResponse>>
                     Username = user.UserName,
                     Token = TokenService.GenerateToken(user, _jwtKey.Secret ?? "")
                 };
+                if (user.Profile != null)
+                {
+                    response.Data.Permissions = user.Profile.Permissions.Select(x => x.Name).ToList();
+                }
                 response.Message = "Usuário logado com sucesso";
             }
             catch (Exception e)

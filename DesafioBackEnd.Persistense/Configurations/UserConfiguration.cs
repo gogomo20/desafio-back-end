@@ -15,6 +15,8 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(x => x.UserName).HasMaxLength(255).IsRequired();
         builder.Property(x => x.Name).HasMaxLength(255).IsRequired();
         builder.Property(x => x.Email).HasMaxLength(255).IsRequired();
+
+        builder.HasOne(x => x.Profile).WithMany().HasForeignKey(x => x.ProfileId).OnDelete(DeleteBehavior.NoAction);
         
         builder.HasData(
             new User
@@ -23,7 +25,8 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
                 Name = "admin",
                 UserName = "admin",
                 Email = "admin@admin",
-                Password = StringUtils.GetBcryptHash("a123457z")
+                Password = StringUtils.GetBcryptHash("a123457z"),
+                ProfileId = 1
             });
     }
 }

@@ -3,7 +3,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StockManager.Aplication.Responses;
 using StockManager.Aplication.UseCases.Users.Commands.Create;
+using StockManager.Aplication.UseCases.Users.Queries.List;
 using StockManager.Attributes;
+using StockManager.Repositories;
+using StockManager.UseCases.UseCases.Users.Commands.Delete;
 using StockManager.UseCases.UseCases.Users.Commands.Update;
 using StockManager.UseCases.UseCases.Users.Queries.Get;
 using StockManager.UseCases.UseCases.Users.Responses;
@@ -57,6 +60,20 @@ public class UserController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GenericResponse<long>))]
     public async Task<IActionResult> DeleteUser([FromRoute] long id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var command = new DeleteUserCommand{Id = id};
+        var response = await _mediator.Send(command, cancellationToken);
+        return response.Success ? Ok(response) : BadRequest(response);
+    }
+
+    [HttpPost("list")]
+    [Permission("LIST_USER")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DefaultApiResponse<ICollection<UserListResponse>>))]
+    public async Task<IActionResult> ListUserAsync([FromBody] ListUserQuery request,
+        [FromQuery] int page = 1, [FromQuery] int size = 10, CancellationToken cancellationToken = default)
+    {
+        request.Size = size;
+        request.Page = page;
+        var response = await _mediator.Send(request, cancellationToken);
+        return Ok(response);
     }
 }

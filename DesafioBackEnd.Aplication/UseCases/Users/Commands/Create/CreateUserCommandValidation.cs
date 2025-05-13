@@ -23,6 +23,11 @@ public class CreateUserCommandValidation : AbstractValidator<CreateUserCommand>
         RuleFor(x => x.Password)
             .NotEmpty().WithMessage("Password is required")
             .MinimumLength(8).WithMessage("Password must be at least 8 characters");
+        When(x => x.ProfileId != null, () =>
+        {
+            RuleFor(x => x.ProfileId)
+                .MustAsync(ProfileExists).WithMessage("Profile does not exist");
+        });
     }
 
     private async Task<bool> EmailsExists(string email, CancellationToken cancellationToken)
@@ -34,5 +39,10 @@ public class CreateUserCommandValidation : AbstractValidator<CreateUserCommand>
     private async Task<bool> UsernamesExists(string? userName, CancellationToken cancellationToken)
     {
         return !await _unitOfWork.GetRepositoryAsync<User>().AnyAsync(x => x.UserName == userName, cancellationToken);
+    }
+
+    private async Task<bool> ProfileExists(long? profileId, CancellationToken cancellationToken)
+    {
+        return await _unitOfWork.GetRepositoryAsync<ProfileEntity>().AnyAsync(x => x.Id == profileId);
     }
 }

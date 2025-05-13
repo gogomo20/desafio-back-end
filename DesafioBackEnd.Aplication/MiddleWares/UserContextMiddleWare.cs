@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Http;
+using StockManager.Aplication.JWTRepository;
 
 namespace StockManager.Aplication.MiddleWares;
 
@@ -10,12 +11,13 @@ public class UserContextMiddleWare
     {
         _next = next;
     }
-    public async Task InvokeAsync(HttpContext context)
+    public async Task InvokeAsync(HttpContext context, UserContext userContext)
     {
         if (context.User.Identity.IsAuthenticated)
         {
             var claims = context.User.Claims;
-            var userId = long.Parse(claims.FirstOrDefault(x => x.Type == "userId").Value);
+            var userId = long.Parse(claims.FirstOrDefault(x => x.Type == "userId")?.Value ?? "-1");
+            userContext.Id = userId;
         }
         await _next(context);
     }

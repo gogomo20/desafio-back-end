@@ -12,6 +12,7 @@ public class UserMapper : Profile
     {
         CreateMap<CreateUserCommand, User>();
         CreateMap<UpdateUserCommand, User>();
-        CreateMap<User, UserResponse>();
+        CreateMap<User, UserResponse>().ForMember(x => x.Permissions, y => y.MapFrom(_ => _.Profile.Permissions.Select(z => z.Name)));
+        CreateMap<User, UserListResponse>();
     }
 }
